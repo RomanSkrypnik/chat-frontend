@@ -1,0 +1,18 @@
+.header{
+
+  .header__logo{
+    font-size: 36px;
+  }
+
+  .header__list-link,
+  .header__logo
+  {
+    color: #EEEEEE;
+  }
+
+  .header__list-item{
+    &:not(:last-child){
+      margin-right: 20px;
+    }
+  }
+}
