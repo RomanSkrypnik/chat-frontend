@@ -1,16 +1,17 @@
 <template>
   <div>
     <ul class="chat-scroll overflow-y-auto grey darken-4"
-        v-chat-scroll="{always: false, smooth: true}"
-        @v-chat-scroll-top-reached="customMethod"
+        ref="chatScroll"
+        v-chat-scroll="{ always: false }"
+        v-on:scroll="getMessagesByScroll"
+        v-if="messages"
     >
-      <v-list-item class="message"
-                   v-for="(message, index) in messages"
-                   :key="index"
-
-      >
+      <v-list-item
+        class="message"
+        v-for="(message, index) in messages"
+        :key="index">
         <v-list-item-content>
-          <v-list-item-title>{{ message.text }}</v-list-item-title>
+          <v-list-item-title class="chat-scroll__title">{{ message.text }}</v-list-item-title>
           <v-list-item-subtitle>{{ message.email }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -26,39 +27,47 @@
 </template>
 
 <script>
+
+  import {mapActions} from 'vuex';
+
   export default {
+
     props: {
       messages: {
         type: Array,
         required: true,
         default: () => [],
+      },
+      socket: {
+        type: Object,
+        required: true,
       }
     },
+
     data() {
       return {
         message: '',
+        roomId: null,
         // messageRules: [
         //   v => v.length < 1 || console.log(v.length),
         // ],
-        socket: null,
-        roomId: null
       }
     },
+
     mounted() {
       this.roomId = this.$route.params.id;
-
-      this.socket = this.$nuxtSocket({
-        name: 'work',
-        room: this.roomId,
-        reconnection: true,
-      });
-
-      this.socket.emit('room', { room: this.roomId });
     },
-    methods: {
 
-      customMethod() {
-        console.log('scrolled');
+    methods: {
+      ...mapActions('rooms', ['fetchOlderMessages']),
+
+      async getMessagesByScroll() {
+        const chatScroll = this.$refs.chatScroll;
+        console.log(chatScroll.scrollTop);
+        if (chatScroll.scrollTop === 0) {
+          // chatScroll.scrollTop = chatScroll.scrollHeight;
+          await this.fetchOlderMessages(this.roomId);
+        }
       },
 
       sendMessage() {
@@ -67,9 +76,13 @@
           email: this.$auth.user.email,
           room: this.roomId,
         };
-
         this.socket.emit('send-message', messageData);
+      },
+
+      scrollToBottom(){
+        const chatScroll = this.$refs.chatScroll;
+        chatScroll.scrollTop = chatScroll.scrollHeight - chatScroll.clientHeight;
       }
-    }
+    },
   }
 </script>

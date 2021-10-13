@@ -27,9 +27,10 @@
           </nav>
         </v-col>
         <v-col
-          class="col-1"
+          class="col-2 d-flex align-center justify-space-around"
           v-if="this.$auth.loggedIn"
         >
+          <UserPhoto/>
           <v-btn
             @click="logout"
           >Log out</v-btn>
@@ -40,7 +41,15 @@
 </template>
 
 <script>
+
+  import UserPhoto from "./UI/UserPhoto";
+
   export default {
+
+    components: {
+      UserPhoto
+    },
+
     data() {
       return {
         menu: [

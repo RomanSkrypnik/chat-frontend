@@ -41,6 +41,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/date-fns',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -58,13 +59,18 @@ export default {
       }
     },
     sockets: [
-      { name: 'main', url: 'http://localhost:5000/' },
+      {name: 'main', url: 'http://localhost:5000/'},
       {
         name: 'work', url: 'http://localhost:5000/',
         vuex: {
-          mutations: [{
-            newMessage: 'rooms/ADD_NEW_MESSAGE'
-          }],
+          mutations: [
+            {
+              newMessage: 'rooms/ADD_NEW_MESSAGE',
+            },
+            {
+              usersOnline: 'rooms/SET_ONLINE_USERS',
+            },
+          ],
         }
       },
     ]
@@ -96,7 +102,8 @@ export default {
         redirect: {
           login: '/login',
           logout: '/logout',
-          home: '/rooms'
+          home: '/rooms',
+          callback: '/login',
         },
         token: {
           property: 'accessToken',
@@ -112,7 +119,11 @@ export default {
           logout: {
             url: '/api/auth/logout',
             method: 'post',
-          }
+          },
+          refresh: {
+            url: '/api/auth/refresh',
+            method: 'get',
+          },
         },
       }
     },
@@ -120,6 +131,6 @@ export default {
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {},
 
-    serverMiddleware: [ "~/serverMiddleware/socket-io-server.js" ],
+    serverMiddleware: ["~/serverMiddleware/socket-io-server.js"],
   }
 }

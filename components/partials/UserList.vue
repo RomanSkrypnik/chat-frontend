@@ -1,9 +1,9 @@
 <template>
   <div class="user-list">
-    <h2 class="title">Users</h2>
+    <h2 class="title">Users in this room</h2>
     <v-list>
       <v-list-item
-        v-for="(user, index) in users"
+        v-for="(user, index) in onlineUsers"
         :key="index"
       >
         <v-list-item-content>
@@ -16,13 +16,11 @@
 
 <script>
 
+  import { mapGetters } from 'vuex';
+
   export default {
-    props: {
-      users: {
-        type: Array,
-        required: true,
-        default: () => [],
-      }
+    computed: {
+      ...mapGetters('rooms', ['onlineUsers'])
     }
   }
 </script>

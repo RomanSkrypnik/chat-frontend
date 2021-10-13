@@ -2,12 +2,12 @@
   <section class="room mt-10">
     <v-container>
       <v-row class="align-start" v-if="room && messages">
-        <UserList
-          :users="room.users"
-        />
+        <UserList/>
         <ChatScroll
           :messages="messages"
+          :socket="roomSocket"
           class="mx-auto"
+          style="flex-grow: 0.6"
         />
       </v-row>
     </v-container>
@@ -21,25 +21,46 @@
   import {mapGetters, mapActions} from 'vuex';
 
   export default {
+
     components: {
       UserList,
       ChatScroll
     },
-    mounted() {
-      const id = this.$route.params.id;
 
-      if(!id){
-        this.$router.push({ path: '/' });
+    props: {
+      roomSocket: {
+        type: Object,
+        required: true,
+      }
+    },
+
+    data() {
+      return {
+        email: null,
+      }
+    },
+
+    mounted() {
+      this.roomId = this.$route.params.id;
+      this.email = this.$auth.user.email
+
+      if (!this.roomId) {
+        this.$router.push({path: '/'});
       }
 
-      this.fetchRoom(id);
+      this.roomSocket.emit('room', {roomId: this.roomId, user: this.$auth.user});
+
+      this.fetchRoom(this.roomId);
+      this.fetchMessages(this.roomId);
     },
+
     computed: {
       ...mapGetters('rooms', ['room', 'messages'])
     },
-    methods: {
-      ...mapActions('rooms', ['fetchRoom']),
 
-    }
+    methods: {
+      ...mapActions('rooms', ['fetchRoom', 'fetchMessages']),
+    },
+
   }
 </script>

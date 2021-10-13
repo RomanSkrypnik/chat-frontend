@@ -1,0 +1,19 @@
+.user-photo{
+
+  .user-photo__image{
+    max-width: 100%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  display: block;
+  position: relative;
+  border-radius: 50%;
+  background-color: #7F828B;
+  overflow: hidden;
+  height: 80px;
+  width: 80px;
+}
