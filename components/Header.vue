@@ -1,5 +1,5 @@
 <template>
-  <header class="header grey darken-4">
+  <header class="header grey darken-3">
     <v-container>
       <v-row class="align-center">
         <v-col>

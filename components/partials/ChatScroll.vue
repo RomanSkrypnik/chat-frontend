@@ -28,16 +28,11 @@
 
 <script>
 
-  import {mapActions} from 'vuex';
+  import {mapActions, mapGetters} from 'vuex';
 
   export default {
 
     props: {
-      messages: {
-        type: Array,
-        required: true,
-        default: () => [],
-      },
       socket: {
         type: Object,
         required: true,
@@ -79,10 +74,10 @@
         this.socket.emit('send-message', messageData);
       },
 
-      scrollToBottom(){
-        const chatScroll = this.$refs.chatScroll;
-        chatScroll.scrollTop = chatScroll.scrollHeight - chatScroll.clientHeight;
-      }
     },
+
+    computed: {
+      ...mapGetters('rooms', ['messages']),
+    }
   }
 </script>

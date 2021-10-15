@@ -4,6 +4,7 @@ export const getDefaultState = () => ({
   messages: [],
   onlineUsers: [],
   offset: 0,
+  topics: [],
   pagination: 0,
 });
 
@@ -23,6 +24,10 @@ export const mutations = {
     state.messages = payload;
   },
 
+  SET_TOPICS(state, payload) {
+    state.topics = payload;
+  },
+
   SET_ONLINE_USERS(state, payload) {
     state.onlineUsers = payload;
   },
@@ -36,11 +41,15 @@ export const mutations = {
   },
 
   ADD_NEW_MESSAGE(state, payload) {
-    state.messages = {payload, ...state.messages};
+    state.messages.push(payload);
   },
 
   ADD_NEW_MESSAGES(state, messages) {
     messages.map(message => state.messages.unshift(message));
+  },
+
+  ADD_NEW_ROOM(state, payload){
+    state.rooms.push(payload);
   },
 
   TRUNCATE_MESSAGES(state) {
@@ -51,8 +60,8 @@ export const mutations = {
 
 export const actions = {
 
-  async fetchRooms({commit}, page) {
-    await this.$axios.$get('/api/rooms')
+  async fetchRooms({commit}, params = {}) {
+    await this.$axios.$get('/api/rooms', params)
       .then(rooms => commit('SET_ROOMS', rooms))
       .catch(e => console.error(e));
   },
@@ -60,6 +69,12 @@ export const actions = {
   async fetchRoom({commit}, id) {
     await this.$axios.$get(`/api/room/${id}`)
       .then(room => commit('SET_ROOM', room))
+      .catch(e => console.error(e));
+  },
+
+  async createRoom({commit}, params) {
+    await this.$axios.$post(`/api/rooms`, params)
+      .then(newRoom => commit('ADD_NEW_ROOM', newRoom))
       .catch(e => console.error(e));
   },
 
@@ -75,6 +90,12 @@ export const actions = {
         commit('ADD_NEW_MESSAGES', messages);
         commit('SET_OFFSET', state.offset + 20);
       })
+      .catch(e => console.error(e));
+  },
+
+  async fetchTopics({commit}) {
+    await this.$axios.$get(`/api/topics`)
+      .then(topics => commit('SET_TOPICS', topics))
       .catch(e => console.error(e));
   }
 }
@@ -95,6 +116,9 @@ export const getters = {
 
   onlineUsers(state) {
     return state.onlineUsers;
-  }
+  },
 
+  topics(state) {
+    return state.topics;
+  }
 }

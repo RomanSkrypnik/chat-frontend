@@ -1,16 +1,26 @@
 <template>
   <main>
-    <RoomsSection/>
+      <TitleSection :title="title"/>
+      <RoomsSection/>
   </main>
 </template>
 
 <script>
-  import RoomsSection from '~/components/sections/Rooms';
+import RoomsSection from '~/components/sections/Rooms';
+import TitleSection from '~/components/sections/Title';
 
-  export default {
-    middleware: 'auth',
-    components: {
-      RoomsSection
-    },
+
+export default {
+  middleware: 'auth',
+  components: {
+    RoomsSection,
+    TitleSection
+  },
+
+  data() {
+    return {
+      title: 'Rooms',
+    }
   }
+}
 </script>
