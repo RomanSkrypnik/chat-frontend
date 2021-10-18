@@ -1,0 +1,14 @@
+.chat-scroll{
+
+  .chat-scroll__title{
+    max-width: 300px;
+  }
+
+  .chat-scroll__messages{
+    width: 100%;
+    height: 450px;
+    overflow: auto;
+  }
+
+  border-radius: 2px;
+}
