@@ -4,49 +4,56 @@
       label="search room"
       v-model="filterFields.title"
     />
-    <div class="subtitle-1">Topics</div>
-    <div class="rooms__dialog-check-body d-flex flex-wrap mt-3">
-      <v-checkbox
-        v-for="(topic, index) in topics"
-        :key="index"
-        v-model="filterFields.topics"
-        :label="topic.name"
-        :value="topic"
-        class="rooms__dialog-checkbox col-5"
-      ></v-checkbox>
-    </div>
+    <v-expansion-panels>
+      <v-expansion-panel>
+        <v-expansion-panel-header>Topics</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <div class="rooms__dialog-check-body d-flex flex-wrap mt-3">
+            <v-checkbox
+              v-for="(topic, index) in topics"
+              :key="index"
+              v-model="filterFields.topics"
+              :label="topic.name"
+              :value="topic"
+              class="rooms__dialog-checkbox col-5"
+            ></v-checkbox>
+          </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
     <v-btn
       type="submit"
-      class="primary"
-    >Search</v-btn>
+      class="primary mt-5"
+    >Search
+    </v-btn>
   </v-form>
 </template>
 
 <script>
 
-  import {mapGetters, mapActions} from "vuex";
+import {mapGetters, mapActions} from "vuex";
 
-  export default {
+export default {
 
-    data(){
-      return {
-        filterFields: {
-          title: '',
-          topics: [],
-        }
+  data() {
+    return {
+      filterFields: {
+        title: '',
+        topics: [],
       }
-    },
-
-    methods: {
-      ...mapActions('rooms', ['fetchRoomsBySearch']),
-
-      searchRooms(){
-        this.fetchRoomsBySearch(this.filterFields);
-      },
-    },
-
-    computed: {
-      ...mapGetters('rooms', ['topics']),
     }
+  },
+
+  methods: {
+    ...mapActions('rooms', ['fetchRoomsBySearch']),
+
+    searchRooms() {
+      this.fetchRoomsBySearch(this.filterFields);
+    },
+  },
+
+  computed: {
+    ...mapGetters('rooms', ['topics']),
   }
+}
 </script>

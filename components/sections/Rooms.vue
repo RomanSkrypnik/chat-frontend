@@ -1,8 +1,8 @@
 <template>
   <section class="rooms">
     <v-container>
-      <v-row class="flex-nowrap">
-        <div class="col-9">
+      <v-row class="flex-nowrap justify-space-between">
+        <div class="col-8">
           <v-btn
             @click="dialog = !dialog"
             class="align-self-start mb-5 green darken-1"
@@ -69,7 +69,7 @@
             <v-list-item
               v-for="(item, index) in rooms"
               :key="index"
-              class="mt-3 grey darken-3 col-5 flex-column align-stretch"
+              class="mt-3 grey darken-3 flex-column align-stretch pa-5"
               style="border-radius: 10px"
             >
               <div class="d-flex align-center">
@@ -82,24 +82,17 @@
                 >Enter
                 </v-btn>
               </div>
-              <v-expansion-panels class="grey darken-1 mt-3">
-                <v-expansion-panel>
-                  <v-expansion-panel-header>Topics</v-expansion-panel-header>
-                  <v-expansion-panel-content>
-                    <ul class="d-flex">
-                      <li
-                        v-for="(topic, index) in item.topics"
-                        :key="index"
-                        class="mr-2"
-                      >{{ topic.name }}</li>
-                    </ul>
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-expansion-panels>
+              <ul class="d-flex pa-0">
+                <li
+                  v-for="(topic, index) in item.topics"
+                  :key="index"
+                  class="mr-2"
+                >{{ topic.name }}</li>
+              </ul>
             </v-list-item>
           </v-list>
         </div>
-        <FilterComponent/>
+        <FilterComponent class="col-4"/>
       </v-row>
     </v-container>
   </section>

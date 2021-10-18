@@ -3,3 +3,7 @@
 @import "components/components";
 @import "forms/forms";
 @import "sections/sections";
+
+.v-list-item::after{
+  display: none;
+}
