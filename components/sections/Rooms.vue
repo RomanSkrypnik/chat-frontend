@@ -64,75 +64,91 @@
           </v-dialog>
           <v-list
             v-if="rooms"
-            class="row transparent justify-space-between"
+            class="row transparent justify-space-between align-start"
           >
             <v-list-item
               v-for="(item, index) in rooms"
               :key="index"
-              class="mt-3 grey darken-3 col-5"
+              class="mt-3 grey darken-3 col-5 flex-column align-stretch"
               style="border-radius: 10px"
             >
-              <v-list-item-content>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-                <v-list-item-subtitle>{{ item.description }}</v-list-item-subtitle>
-              </v-list-item-content>
-              <v-btn
-                @click="enterRoom(item._id)"
-              >Enter
-              </v-btn>
+              <div class="d-flex align-center">
+                <v-list-item-content>
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                  <v-list-item-subtitle>{{ item.description }}</v-list-item-subtitle>
+                </v-list-item-content>
+                <v-btn
+                  @click="enterRoom(item._id)"
+                >Enter
+                </v-btn>
+              </div>
+              <v-expansion-panels class="grey darken-1 mt-3">
+                <v-expansion-panel>
+                  <v-expansion-panel-header>Topics</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <ul class="d-flex">
+                      <li
+                        v-for="(topic, index) in item.topics"
+                        :key="index"
+                        class="mr-2"
+                      >{{ topic.name }}</li>
+                    </ul>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
             </v-list-item>
           </v-list>
         </div>
-        <FilterComponent />
+        <FilterComponent/>
       </v-row>
     </v-container>
   </section>
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
-import FilterComponent from "~/components/partials/Filter";
+    import {mapActions, mapGetters} from 'vuex';
+    import FilterComponent from "~/components/partials/Filter";
 
-export default {
+    export default {
 
-  components: {
-    FilterComponent
-  },
+        components: {
+            FilterComponent
+        },
 
-  data() {
-    return {
-      dialog: false,
-      newRoomFields: {
-        title: '',
-        description: '',
-        maxQuantity: 0,
-        topics: [],
-        email: this.$auth.user.email,
-      },
+        data() {
+            return {
+                dialog: false,
+                newRoomFields: {
+                    title: '',
+                    description: '',
+                    maxQuantity: 0,
+                    topics: [],
+                    email: this.$auth.user.email,
+                },
+            }
+        },
+
+        mounted() {
+            this.fetchRooms();
+            this.fetchTopics();
+        },
+
+        computed: {
+            ...mapGetters('rooms', ['rooms', 'topics']),
+
+        },
+
+        methods: {
+            ...mapActions('rooms', ['fetchRooms', 'createRoom', 'fetchTopics']),
+
+            enterRoom(id) {
+                this.$router.push({path: `/rooms/${id}`});
+            },
+
+            addNewRoom() {
+                this.createRoom(this.newRoomFields);
+            },
+        },
+
     }
-  },
-
-  mounted() {
-    this.fetchRooms();
-    this.fetchTopics();
-  },
-
-  computed: {
-    ...mapGetters('rooms', ['rooms', 'topics']),
-
-  },
-
-  methods: {
-    ...mapActions('rooms', ['fetchRooms', 'createRoom', 'fetchTopics']),
-
-    enterRoom(id) {
-      this.$router.push({path: `/rooms/${id}`});
-    },
-
-    addNewRoom() {
-      this.createRoom(this.newRoomFields);
-    },
-  },
-
-}
 </script>

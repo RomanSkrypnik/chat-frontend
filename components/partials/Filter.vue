@@ -2,7 +2,7 @@
   <v-form @submit.prevent="searchRooms">
     <v-text-field
       label="search room"
-      v-model="filterFields.search"
+      v-model="filterFields.title"
     />
     <div class="subtitle-1">Topics</div>
     <div class="rooms__dialog-check-body d-flex flex-wrap mt-3">
@@ -31,19 +31,18 @@
     data(){
       return {
         filterFields: {
-          search: '',
+          title: '',
           topics: [],
         }
       }
     },
 
     methods: {
-      ...mapActions('rooms', ['fetchRooms']),
+      ...mapActions('rooms', ['fetchRoomsBySearch']),
 
       searchRooms(){
-        this.fetchRooms(this.filterFields);
-      }
-
+        this.fetchRoomsBySearch(this.filterFields);
+      },
     },
 
     computed: {

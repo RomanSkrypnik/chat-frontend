@@ -30,7 +30,7 @@ export default {
   ],
 
   axios: {
-    baseUrl: process.env.API_URL,
+    baseUrl: "http://localhost:5000",
     https: false,
   },
 

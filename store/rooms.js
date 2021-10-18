@@ -56,12 +56,18 @@ export const mutations = {
     state.messages = [];
   },
 
-}
+};
 
 export const actions = {
 
-  async fetchRooms({commit}, params = {}) {
-    await this.$axios.$get('/api/rooms', params)
+  async fetchRooms({commit}) {
+    await this.$axios.$get('/api/rooms')
+      .then(rooms => commit('SET_ROOMS', rooms))
+      .catch(e => console.error(e));
+  },
+
+  async fetchRoomsBySearch({commit}, params){
+    await this.$axios.$post('/api/rooms-by-search', params)
       .then(rooms => commit('SET_ROOMS', rooms))
       .catch(e => console.error(e));
   },
