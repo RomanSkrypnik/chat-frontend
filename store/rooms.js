@@ -48,7 +48,7 @@ export const mutations = {
     messages.map(message => state.messages.unshift(message));
   },
 
-  ADD_NEW_ROOM(state, payload){
+  ADD_NEW_ROOM(state, payload) {
     state.rooms.push(payload);
   },
 
@@ -66,7 +66,7 @@ export const actions = {
       .catch(e => console.error(e));
   },
 
-  async fetchRoomsBySearch({commit}, params){
+  async fetchRoomsBySearch({commit}, params) {
     await this.$axios.$post('/api/rooms-by-search', params)
       .then(rooms => commit('SET_ROOMS', rooms))
       .catch(e => console.error(e));

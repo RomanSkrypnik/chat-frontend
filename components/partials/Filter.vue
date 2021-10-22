@@ -15,7 +15,8 @@
               v-model="filterFields.topics"
               :label="topic.name"
               :value="topic"
-              class="rooms__dialog-checkbox col-5"
+              class="rooms_
+              _dialog-checkbox col-5"
             ></v-checkbox>
           </div>
         </v-expansion-panel-content>

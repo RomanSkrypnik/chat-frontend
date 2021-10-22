@@ -4,10 +4,7 @@
       <v-row class="align-start" v-if="room && messages">
         <UserList/>
         <ChatScroll
-          :messages="messages"
           :socket="roomSocket"
-          class="mx-auto"
-          style="flex-grow: 0.6"
         />
       </v-row>
     </v-container>
@@ -18,13 +15,15 @@
 
   import UserList from '~/components/partials/UserList';
   import ChatScroll from "../partials/ChatScroll";
+  import AddDialog from "../dialogs/AddDialog";
   import {mapGetters, mapActions} from 'vuex';
 
   export default {
 
     components: {
       UserList,
-      ChatScroll
+      ChatScroll,
+      AddDialog
     },
 
     props: {

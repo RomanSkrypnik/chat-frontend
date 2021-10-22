@@ -7,7 +7,7 @@
       <template v-slot:prepend>
         <v-list-item two-line>
           <v-list-item-avatar>
-            <img src="https://randomuser.me/api/portraits/women/81.jpg">
+            <img :src="`http://localhost:5000/public/images/users/${$auth.user.photo}`">
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -49,6 +49,16 @@ export default {
           link: '/rooms',
         },
         {
+          title: 'Friends',
+          icon: 'mdi-human-male-female',
+          link: '/friends'
+        },
+        {
+          title: 'Messages',
+          icon: 'mdi-message-text-outline',
+          link: '/messages',
+        },
+        {
           title: 'About us',
           icon: 'mdi-information',
           link: '/about',
@@ -58,6 +68,11 @@ export default {
           icon: 'mdi-help-circle-outline',
           link: '/help',
         },
+        {
+          title: 'Logout',
+          icon: 'mdi-exit-to-app',
+          link: '/logout'
+        }
       ],
     }
   },

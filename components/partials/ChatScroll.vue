@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <ul class="chat-scroll overflow-y-auto grey darken-4"
+  <div class="chat-scroll mx-auto grey darken-1 pa-5 col-8">
+    <ul class="chat-scroll__messages overflow-y-auto grey darken-4"
         ref="chatScroll"
         v-chat-scroll="{ always: false }"
         v-on:scroll="getMessagesByScroll"
@@ -43,6 +43,7 @@
       return {
         message: '',
         roomId: null,
+        chatScrollHeight: 0,
         // messageRules: [
         //   v => v.length < 1 || console.log(v.length),
         // ],
@@ -58,10 +59,10 @@
 
       async getMessagesByScroll() {
         const chatScroll = this.$refs.chatScroll;
-        console.log(chatScroll.scrollTop);
         if (chatScroll.scrollTop === 0) {
-          // chatScroll.scrollTop = chatScroll.scrollHeight;
+          this.chatScrollHeight = chatScroll.scrollHeight;
           await this.fetchOlderMessages(this.roomId);
+          chatScroll.scrollTop = chatScroll.scrollHeight - this.chatScrollHeight;
         }
       },
 
