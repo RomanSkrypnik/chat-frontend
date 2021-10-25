@@ -19,12 +19,6 @@
             color="white"
             outlined
             label="password"/>
-          <v-file-input
-            v-model="registerFields.photo"
-            color="white"
-            name="image"
-            label="image"
-            type="file"/>
           <v-btn
             class="align-self-center light-blue darken-1"
             @click="register"
@@ -47,7 +41,6 @@ export default {
         email: '',
         login: '',
         password: '',
-        photo: null
       }
     }
   },
@@ -55,18 +48,7 @@ export default {
   methods: {
 
     async register() {
-
-      const fd = new FormData();
-      fd.append('email', this.registerFields.email);
-      fd.append('login', this.registerFields.login);
-      fd.append('password', this.registerFields.password);
-      fd.append('photo', this.registerFields.photo);
-
-      await this.$axios.$post('/api/auth/register', fd)
-        .then(response => {
-          // this.$router.push({path: '/login'});
-        }).catch(e => console.log(e.message));
-
+      await this.$axios.$post('/api/auth/register', this.registerFields);
     }
   }
 }
