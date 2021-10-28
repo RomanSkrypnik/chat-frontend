@@ -36,15 +36,15 @@ export const actions = {
       .catch(e => console.error(e));
   },
 
-  async addFriend({commit}, user) {
-    await this.$axios.$post('/api/send-friend-request', user)
-      .then(response => console.log(response))
+  async fetchMyFriendsBySearch({commit}, params) {
+    await this.$axios.$post('/api/friends-by-search', params)
+      .then(friends => commit('SET_FRIENDS', friends))
       .catch(e => console.error(e));
   },
 
-  async fetchFriendsBySearch({commit}, params) {
-    await this.$axios.$post('/api/users', params)
-      .then(users => commit('SET_FRIENDS_BY_SEARCH', users))
+  async addFriend({commit}, user) {
+    await this.$axios.$post('/api/send-friend-request', user)
+      .then(response => console.log(response))
       .catch(e => console.error(e));
   },
 
@@ -57,6 +57,12 @@ export const actions = {
   async acceptFriendRequest({commit}, users) {
     await this.$axios.$post('/api/accept-friend-request', users)
       .then(sender => commit('REMOVE_PENDING_REQUEST', sender))
+      .catch(e => console.error(e));
+  },
+
+  async fetchUsersBySearch({commit}, params) {
+    await this.$axios.$post('/api/users', params)
+      .then(users => commit('SET_FRIENDS_BY_SEARCH', users))
       .catch(e => console.error(e));
   },
 

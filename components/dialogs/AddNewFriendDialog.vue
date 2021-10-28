@@ -49,7 +49,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('friends', ['fetchFriendsBySearch']),
+    ...mapActions('friends', ['fetchUsersBySearch']),
 
     searchNewFriends(){
       const searchData = {
@@ -57,7 +57,7 @@ export default {
         user: this.$auth.user,
       };
 
-      this.fetchFriendsBySearch(searchData);
+      this.fetchUsersBySearch(searchData);
     },
 
     close() {

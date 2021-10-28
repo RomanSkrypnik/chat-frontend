@@ -4,7 +4,7 @@
       <v-form class="friends-scroll__form">
         <v-text-field
           v-model="search"
-          @change="fetchMyFriendsBySearch"
+          @change="fetchFriendsBySearch"
           outlined
           color="white"
           label="search"
@@ -33,11 +33,12 @@ export default {
   data() {
     return {
       search: '',
+      user: this.$auth.user,
     }
   },
 
   mounted() {
-    this.fetchMyFriends(this.$auth.user);
+    this.fetchMyFriends({user: this.user});
   },
 
   computed: {
@@ -45,10 +46,15 @@ export default {
   },
 
   methods: {
-    ...mapActions('friends', ['fetchMyFriends']),
+    ...mapActions('friends', ['fetchMyFriends', 'fetchMyFriendsBySearch']),
 
-    fetchMyFriendsBySearch() {
-      // this.fetchMyFriends(this.search);
+    fetchFriendsBySearch() {
+      const params = {
+        user: this.user,
+        search: this.search,
+      };
+
+      this.fetchMyFriendsBySearch(params);
     }
   }
 }
