@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="modal" max-width="500px">
+  <v-dialog v-model="show" max-width="500px">
     <v-card>
       <v-btn
         class="v-btn--absolute"
@@ -42,17 +42,6 @@ export default {
     }
   },
 
-  computed: {
-    modal: {
-      get() {
-        return this.show;
-      },
-      set(value) {
-        this.$nuxt.$emit('')
-      }
-    }
-  },
-
   data() {
     return {
       search: '',
@@ -63,7 +52,12 @@ export default {
     ...mapActions('friends', ['fetchFriendsBySearch']),
 
     searchNewFriends(){
-      this.fetchFriendsBySearch(this.search);
+      const searchData = {
+        search: this.search,
+        user: this.$auth.user,
+      };
+
+      this.fetchFriendsBySearch(searchData);
     },
 
     close() {

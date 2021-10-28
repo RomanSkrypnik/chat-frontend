@@ -7,10 +7,9 @@
     <v-btn
       @click="declineRequest"
       color="red"
-      v-else-if="requestSent">Decline request</v-btn>
+      v-else>Decline request</v-btn>
   </div>
 </template>
-
 
 <script>
 

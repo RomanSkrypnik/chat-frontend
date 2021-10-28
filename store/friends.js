@@ -42,8 +42,8 @@ export const actions = {
       .catch(e => console.error(e));
   },
 
-  async fetchFriendsBySearch({commit}, login) {
-    await this.$axios.$post('/api/users', {login})
+  async fetchFriendsBySearch({commit}, params) {
+    await this.$axios.$post('/api/users', params)
       .then(users => commit('SET_FRIENDS_BY_SEARCH', users))
       .catch(e => console.error(e));
   },
