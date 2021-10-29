@@ -6,11 +6,12 @@
           v-model="search"
           @change="fetchFriendsBySearch"
           outlined
+          background-color="grey darken-3"
           color="white"
           label="search"
         />
-        <v-list class="friends-scroll__list d-flex align-start overflow-auto flex-wrap align-content-start">
-          <v-list-item class="friends-scroll__item d-flex" v-for="(friend, index) in friends" :key="index">
+        <v-list class="friends-scroll__list d-flex align-start overflow-auto flex-wrap align-content-start" style="background-color: #171a21">
+          <v-list-item class="friends-scroll__item d-flex pa-3" v-for="(friend, index) in friends" :key="index" style="background-color: #1b2838">
             <img
               src="https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg"
               alt="Photo" class="friends-scroll__image">

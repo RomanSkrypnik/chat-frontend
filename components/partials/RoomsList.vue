@@ -6,7 +6,7 @@
     <v-list-item
       v-for="(room, index) in rooms"
       :key="index"
-      class="mt-3 grey darken-3 flex-column align-stretch pa-5"
+      class="mt-3 indigo darken-3 flex-column align-stretch pa-5"
       style="border-radius: 10px"
     >
       <div class="d-flex align-center">

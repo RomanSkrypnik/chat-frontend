@@ -5,16 +5,17 @@
       permanent
     >
       <template v-slot:prepend>
-        <v-list-item two-line>
-          <v-list-item-avatar>
-            <img :src="`http://localhost:5000/public/images/users/${$auth.user.photo}`">
-          </v-list-item-avatar>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ $auth.user.email }}</v-list-item-title>
-            <v-list-item-subtitle>Logged In</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+        <nuxt-link to="/account">
+          <v-list-item two-line>
+            <v-list-item-avatar>
+              <img :src="`http://localhost:5000/public/images/users/${$auth.user.photo}`">
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title>{{ $auth.user.email }}</v-list-item-title>
+              <v-list-item-subtitle>Logged In</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </nuxt-link>
       </template>
 
       <v-divider></v-divider>
@@ -30,7 +31,7 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title class="grey--text text--darken-1">{{ item.title }}</v-list-item-title>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item-content>
           </nuxt-link>
         </v-list-item>

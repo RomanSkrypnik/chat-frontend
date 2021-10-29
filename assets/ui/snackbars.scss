@@ -1,0 +1,19 @@
+.v-snack{
+
+  .message-snackbar {
+
+    .message-snackbar__inner{
+      position: relative;
+    }
+
+    .message-snackbar__close-button{
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    background-color: rgba(0, 0, 0, 0.5) !important;
+  }
+
+}
+

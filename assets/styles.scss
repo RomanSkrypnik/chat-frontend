@@ -3,7 +3,17 @@
 @import "components/components";
 @import "forms/forms";
 @import "sections/sections";
+@import "ui/ui";
+@import "color";
 
 .v-list-item::after{
   display: none;
+}
+
+.v-app-layout{
+  background-color: #120458;
+}
+
+a {
+  color: #66c0f4 !important;
 }

@@ -1,11 +1,13 @@
 <template>
   <v-form @submit.prevent="searchRooms">
     <v-text-field
+      color="indigo darken-3"
+      outlined
       label="search room"
       v-model="filterFields.title"
     />
     <v-expansion-panels>
-      <v-expansion-panel>
+      <v-expansion-panel class="indigo darken-3">
         <v-expansion-panel-header>Topics</v-expansion-panel-header>
         <v-expansion-panel-content>
           <div class="rooms__dialog-check-body d-flex flex-wrap mt-3">
@@ -15,16 +17,14 @@
               v-model="filterFields.topics"
               :label="topic.name"
               :value="topic"
-              class="rooms_
-              _dialog-checkbox col-5"
-            ></v-checkbox>
+              class="rooms__dialog-checkbox col-5" />
           </div>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
     <v-btn
       type="submit"
-      class="primary mt-5"
+      class="indigo darken-3 mt-5"
     >Search
     </v-btn>
   </v-form>

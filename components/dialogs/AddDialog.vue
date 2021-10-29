@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn @click="dialog = true" class="align-self-start mb-5 green darken-1">+</v-btn>
+    <v-btn @click="dialog = true" class="align-self-start mb-5 green darken-2">Create new room</v-btn>
     <v-dialog
       v-model="dialog"
       max-width="500px"
@@ -12,8 +12,7 @@
           text
           color="red"
           @click="dialog = false"
-        >X
-        </v-btn>
+        >X</v-btn>
         <v-card-title>
           <span>Create new room</span>
           <v-spacer></v-spacer>
