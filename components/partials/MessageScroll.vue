@@ -34,11 +34,12 @@
     data() {
       return {
         message: '',
+        mainSocket: null,
       }
     },
 
     computed: {
-      ...mapGetters('privateMessages', ['messages'])
+      ...mapGetters('privateMessages', ['messages']),
     },
 
     methods: {
@@ -52,12 +53,8 @@
       },
 
       sendMessage() {
-        // const messageData = {
-        //   text: this.message,
-        //   email: this.$auth.user.email,
-        //   room: this.roomId,
-        // };
-        // this.socket.emit('send-message', messageData);
+        const receiver = this.$route.params.id;
+        this.$nuxt.$emit('send-private-message', receiver, this.message);
       },
 
     },

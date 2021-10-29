@@ -11,6 +11,11 @@ export const mutations = {
     state.messages = payload;
   },
 
+  ADD_NEW_MESSAGE(state, payload) {
+    console.log('newMessage');
+    state.messages.push(payload);
+  },
+
   SET_LAST_MESSAGES(state, payload) {
     state.lastMessages = payload;
   }

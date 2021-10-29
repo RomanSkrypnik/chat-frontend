@@ -11,6 +11,7 @@
   export default {
     middleware: 'auth',
     auth: 'guest',
+    layout: 'Unauthorized',
     components: {
       LoginForm
     }

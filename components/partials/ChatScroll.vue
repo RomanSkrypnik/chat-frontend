@@ -4,8 +4,7 @@
         ref="chatScroll"
         v-chat-scroll="{ always: false }"
         v-on:scroll="getMessagesByScroll"
-        v-if="messages"
-    >
+        v-if="messages">
       <v-list-item
         class="message"
         v-for="(message, index) in messages"
@@ -32,13 +31,6 @@
 
   export default {
 
-    props: {
-      socket: {
-        type: Object,
-        required: true,
-      }
-    },
-
     data() {
       return {
         message: '',
@@ -59,6 +51,7 @@
 
       async getMessagesByScroll() {
         const chatScroll = this.$refs.chatScroll;
+        console.log(chatScroll.scrollTop);
         if (chatScroll.scrollTop === 0) {
           this.chatScrollHeight = chatScroll.scrollHeight;
           await this.fetchOlderMessages(this.roomId);
@@ -67,12 +60,7 @@
       },
 
       sendMessage() {
-        const messageData = {
-          text: this.message,
-          email: this.$auth.user.email,
-          room: this.roomId,
-        };
-        this.socket.emit('send-message', messageData);
+        this.$nuxt.$emit('send-room-message', this.roomId, this.$auth.user, this.message);
       },
 
     },

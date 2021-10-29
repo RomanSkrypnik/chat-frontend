@@ -1,1 +1,7 @@
-export const state = () => ({});
+const getDefaultState = () => ({});
+
+export const state = getDefaultState;
+
+
+
+

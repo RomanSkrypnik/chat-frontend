@@ -10,7 +10,6 @@ export const state = getDefaultState;
 export const mutations = {
 
   SET_FRIENDS(state, payload) {
-    console.log(payload);
     state.friends = payload;
   },
 

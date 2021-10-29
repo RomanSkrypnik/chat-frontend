@@ -59,9 +59,29 @@ export default {
       }
     },
     sockets: [
-      {name: 'main', url: 'http://localhost:5000/'},
       {
-        name: 'work', url: 'http://localhost:5000/',
+        name: 'main',
+        url: 'http://localhost:5000/',
+        vuex: {
+          mutations: [
+            {
+              'new-private-message' : 'privateMessages/ADD_NEW_MESSAGE'
+            },
+            {
+              'new-private-message-self' : 'privateMessages/ADD_NEW_MESSAGE'
+            },
+            {
+              'users-online' : 'rooms/SET_ONLINE_USERS',
+            },
+            {
+              'new-room-message' : 'rooms/ADD_NEW_MESSAGE',
+            },
+          ]
+        }
+      },
+      {
+        name: 'work',
+        url: 'http://localhost:5000/',
         vuex: {
           mutations: [
             {
