@@ -4,16 +4,26 @@
 @import "forms/forms";
 @import "sections/sections";
 @import "ui/ui";
-@import "color";
+@import "colors";
+@import "background-colors";
 
-.v-list-item::after{
+main {
+  padding-left: 300px;
+  padding-right: 300px
+}
+
+.v-list-item::after {
   display: none;
 }
 
-.v-app-layout{
+.v-app-layout {
   background-color: #120458;
 }
 
 a {
   color: #66c0f4 !important;
+}
+
+.v-list-item__title {
+  max-width: none !important;
 }

@@ -1,12 +1,16 @@
 <template>
-  <header class="header grey darken-3">
+  <header class="header dark-bg" style="padding-left: 300px; padding-right: 300px">
     <v-container>
       <v-row class="align-center">
+        <div class="header__burger" @click="onBurgerClick">
+          <span class="header__burger-delimiter"></span>
+        </div>
         <v-col>
           <nuxt-link
             class="header__logo"
             to="/"
-          >Real-time chat</nuxt-link>
+          >Real-time chat
+          </nuxt-link>
         </v-col>
         <v-col
           class="d-flex justify-center"
@@ -21,19 +25,11 @@
                 <nuxt-link
                   class="header__list-link"
                   :to="menu.link"
-                >{{ menu.text }}</nuxt-link>
+                >{{ menu.text }}
+                </nuxt-link>
               </li>
             </ul>
           </nav>
-        </v-col>
-        <v-col
-          class="col-2 d-flex align-center justify-space-around"
-          v-if="this.$auth.loggedIn"
-        >
-          <UserPhoto/>
-          <v-btn
-            @click="logout"
-          >Log out</v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -42,38 +38,41 @@
 
 <script>
 
-  import UserPhoto from "./UI/UserPhoto";
+import UserPhoto from "./UI/UserPhoto";
 
-  export default {
+export default {
 
-    components: {
-      UserPhoto
-    },
+  components: {
+    UserPhoto
+  },
 
-    data() {
-      return {
-        menu: [
-          {
-            text: 'Rooms',
-            link: '/rooms'
-          },
-          {
-            text: 'About us',
-            link: '/about'
-          },
-          {
-            text: 'Help',
-            link: '/help',
-          }
-        ]
-      }
-    },
-    methods: {
-      async logout(){
-        await this.$auth.logout();
-
-        await this.$router.push({path: '/login'});
-      }
+  data() {
+    return {
+      sidebar: false,
+      menu: [
+        {
+          text: 'Rooms',
+          link: '/rooms'
+        },
+        {
+          text: 'About us',
+          link: '/about'
+        },
+        {
+          text: 'Help',
+          link: '/help',
+        }
+      ]
     }
+  },
+
+  methods: {
+    onBurgerClick() {
+      this.sidebar = !this.sidebar;
+      this.$nuxt.$emit('sidebar', this.sidebar);
+    },
+
   }
+
+}
 </script>

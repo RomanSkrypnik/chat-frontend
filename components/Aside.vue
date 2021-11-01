@@ -1,9 +1,11 @@
 <template>
-  <v-card>
+  <v-card
+    v-show="show"
+    class="aside">
     <v-navigation-drawer
+      class="aside__drawer dark-bg"
       fixed
-      permanent
-    >
+      permanent>
       <template v-slot:prepend>
         <nuxt-link to="/account">
           <v-list-item two-line>
@@ -41,8 +43,10 @@
 </template>
 <script>
 export default {
+
   data() {
     return {
+      show: false,
       items: [
         {
           title: 'Rooms',
@@ -77,5 +81,11 @@ export default {
       ],
     }
   },
+
+  mounted() {
+    this.$nuxt.$on('sidebar', (value) => {
+      this.show = value;
+    });
+  }
 }
 </script>

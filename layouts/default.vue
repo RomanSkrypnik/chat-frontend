@@ -1,7 +1,8 @@
 <template>
-  <v-app>
-    <Aside v-if="$auth.loggedIn"/>
-    <Nuxt style="padding-left: 300px; padding-right: 300px"/>
+  <v-app class="light-blue-bg">
+    <Header/>
+    <Aside/>
+    <Nuxt/>
     <Snackbar/>
   </v-app>
 </template>

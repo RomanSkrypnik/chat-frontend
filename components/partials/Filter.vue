@@ -1,13 +1,12 @@
 <template>
   <v-form @submit.prevent="searchRooms">
     <v-text-field
-      color="indigo darken-3"
       outlined
       label="search room"
       v-model="filterFields.title"
     />
     <v-expansion-panels>
-      <v-expansion-panel class="indigo darken-3">
+      <v-expansion-panel class="dark-bg">
         <v-expansion-panel-header>Topics</v-expansion-panel-header>
         <v-expansion-panel-content>
           <div class="rooms__dialog-check-body d-flex flex-wrap mt-3">
@@ -17,16 +16,22 @@
               v-model="filterFields.topics"
               :label="topic.name"
               :value="topic"
-              class="rooms__dialog-checkbox col-5" />
+              class="rooms__dialog-checkbox col-5"/>
           </div>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
-    <v-btn
-      type="submit"
-      class="indigo darken-3 mt-5"
-    >Search
-    </v-btn>
+    <div class="d-flex mt-5">
+      <v-btn
+        type="submit"
+        class="transparent-blue-bg mr-4"
+      >Search</v-btn>
+      <v-btn
+        @click="show = true"
+        class="align-self-start green-bg"
+      >Create new room</v-btn>
+    </div>
+    <AddDialog :show="show" @close="show = false"/>
   </v-form>
 </template>
 
@@ -34,14 +39,21 @@
 
 import {mapGetters, mapActions} from "vuex";
 
+import AddDialog from "~/components/dialogs/AddDialog";
+
 export default {
+
+  components: {
+    AddDialog
+  },
 
   data() {
     return {
       filterFields: {
         title: '',
         topics: [],
-      }
+      },
+      show: false,
     }
   },
 

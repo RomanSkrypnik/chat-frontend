@@ -3,7 +3,6 @@
     <v-container>
       <v-row class="flex-nowrap justify-space-between">
         <div class="col-8">
-          <AddDialog/>
           <RoomsList/>
         </div>
         <FilterComponent class="col-4"/>
@@ -16,14 +15,12 @@
 import {mapActions} from 'vuex';
 import FilterComponent from "~/components/partials/Filter";
 import RoomsList from "~/components/partials/RoomsList";
-import AddDialog from "~/components/dialogs/AddDialog";
 
 export default {
 
   components: {
     FilterComponent,
     RoomsList,
-    AddDialog
   },
 
   mounted() {

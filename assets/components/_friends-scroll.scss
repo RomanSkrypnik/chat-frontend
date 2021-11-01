@@ -1,5 +1,12 @@
 .friends-scroll{
 
+  .friends-scroll__top-line{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px 15px 10px;
+  }
+
   .friends-scroll__list{
     border-radius: 10px !important;
     height: 450px;
@@ -7,20 +14,29 @@
   }
 
   .friends-scroll__image{
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    margin-right: 35px;
+    height: 55px;
+    width: 55px;
+    margin-right: 15px;
   }
 
   .friends-scroll__item{
     &:nth-child(n + 5){
       margin-top: 35px;
     }
-    border-radius: 5px;
     flex-grow: 0;
     flex-basis: auto;
     width: 25%;
+    padding: 0 0 0 0;
+  }
+
+  .friends-scroll__button{
+    &:not(:last-child){
+      margin-right: 20px;
+    }
+  }
+
+  .friends-scroll__form{
+    width: 75%;
   }
 
 }

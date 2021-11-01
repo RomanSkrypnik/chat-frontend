@@ -1,17 +1,15 @@
 <template>
   <div>
-    <v-btn @click="dialog = true" class="align-self-start mb-5 green darken-2">Create new room</v-btn>
     <v-dialog
-      v-model="dialog"
-      max-width="500px"
-    >
+      v-model="show"
+      max-width="500px">
       <v-card>
         <v-btn
           class="v-btn--absolute"
           style="right: 0"
           text
           color="red"
-          @click="dialog = false"
+          @click="closeModal"
         >X</v-btn>
         <v-card-title>
           <span>Create new room</span>
@@ -58,9 +56,20 @@
 
 <script>
 
-import {mapGetters} from "vuex";
+import {mapGetters, mapActions} from "vuex";
 
 export default {
+
+  model: {
+    prop: 'show'
+  },
+
+  props: {
+    show: {
+      type: Boolean,
+      default: false,
+    }
+  },
 
   data() {
     return {
@@ -71,7 +80,6 @@ export default {
         topics: [],
         email: this.$auth.user.email,
       },
-      dialog: false,
     }
   },
 
@@ -80,9 +88,15 @@ export default {
   },
 
   methods: {
+    ...mapActions('rooms', ['createRoom']),
+
     addNewRoom() {
       this.createRoom(this.newRoomFields);
     },
+
+    closeModal() {
+      this.$emit('close');
+    }
   },
 }
 </script>

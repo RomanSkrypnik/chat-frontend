@@ -1,16 +1,16 @@
 <template>
-  <div class="chat-scroll mx-auto grey darken-1 pa-5 col-8">
-    <ul class="chat-scroll__messages overflow-y-auto grey darken-4"
+  <div class="chat-scroll mx-auto col-8 dark-bg">
+    <ul class="chat-scroll__messages overflow-y-auto grey darken-4 pa-0 d-flex flex-column"
         ref="chatScroll"
         v-chat-scroll="{ always: false }"
         v-on:scroll="getMessagesByScroll"
-        v-if="messages"
-    >
+        v-if="messages">
       <v-list-item
-        class="message"
+        class="chat-scroll__item"
         v-for="(message, index) in messages"
+        :class="message.sender === $auth.user.login ? 'chat-scroll__item_me transparent-blue-bg' : 'dark-teal-bg'"
         :key="index">
-        <v-list-item-content>
+        <v-list-item-content class="d-block">
           <v-list-item-title class="chat-scroll__title">{{ message.message }}</v-list-item-title>
           <v-list-item-subtitle>{{ message.sender }}</v-list-item-subtitle>
         </v-list-item-content>
@@ -21,7 +21,7 @@
         v-model="message"
         label="message"
       ></v-text-field>
-      <v-btn type="submit">Send</v-btn>
+      <v-btn type="submit" class="light-blue-bg">Send</v-btn>
     </v-form>
   </div>
 </template>

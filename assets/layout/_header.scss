@@ -15,4 +15,34 @@
       margin-right: 20px;
     }
   }
+
+  .header__burger{
+    &::before,
+    &::after,
+    .header__burger-delimiter
+    {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 4px;
+      background-color: #2a475e;
+      position: absolute;
+      left: 0;
+    }
+    &::before{
+      top: 0;
+    }
+    &::after {
+      bottom: 0;
+    }
+    .header__burger-delimiter {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    position: relative;
+  }
+
 }

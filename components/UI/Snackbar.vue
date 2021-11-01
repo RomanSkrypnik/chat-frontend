@@ -1,27 +1,14 @@
 <template>
-  <!--    <v-snackbar-->
-  <!--      v-if="message"-->
-  <!--      v-model="snackbar"-->
-  <!--      :multi-line="multiLine">-->
-  <!--      <div class="d-flex">-->
-  <!--        <div>{{ message.sender }}</div>-->
-  <!--        <div class="ml-4">{{ message.message }}</div>-->
-  <!--      </div>-->
-  <!--      <template v-slot:action="{ attrs }">-->
-  <!--        <v-btn-->
-  <!--          color="red"-->
-  <!--          text-->
-  <!--          v-bind="attrs"-->
-  <!--          @click="snackbar = false">Close</v-btn>-->
-  <!--      </template>-->
-  <!--    </v-snackbar>-->
   <v-snackbar
+    bottom
+    right
     class="message-snackbar"
+    v-if="message"
     v-model="snackbar">
     <div class="message-snackbar__inner">
       <div>
-        <div class="grey--text">Sender</div>
-        <div>Message</div>
+        <div class="grey--text">{{ message.sender }}</div>
+        <div>{{ message.message }}</div>
       </div>
     </div>
     <template v-slot:action="{ attrs }">
@@ -30,7 +17,8 @@
         color="red"
         text
         v-bind="attrs"
-        @click="snackbar = false">x</v-btn>
+        @click="snackbar = false">x
+      </v-btn>
     </template>
   </v-snackbar>
 </template>
@@ -39,7 +27,7 @@
 export default {
   data: () => ({
     message: null,
-    snackbar: true,
+    snackbar: false,
   }),
   mounted() {
     this.$nuxt.$on('snackbar-private-message', (message) => {
