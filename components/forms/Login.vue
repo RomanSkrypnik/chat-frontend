@@ -5,14 +5,14 @@
         <v-form class="login-form__form dark-bg d-flex flex-column mt-3">
           <legend class="text-h4 text-center mb-5">Login</legend>
           <v-text-field
-            v-model="loginFields.email"
+            v-model="$v.email.$model"
             label="email"
             color="white"
             outlined
             required
           />
           <v-text-field
-            v-model="loginFields.password"
+            v-model="$v.password.$model"
             label="password"
             color="white"
             required
@@ -20,10 +20,13 @@
           />
           <v-btn
             class="align-self-center dark-teal-bg"
-            @click="login">Sign in</v-btn>
+            @click="login"
+            :disabled="!$v.email.required || !$v.password.required"
+          >Sign in</v-btn>
           <nuxt-link
             class="mt-8 text-center subtitle-1"
-            to="/register">You don't have an account? Click here to register!</nuxt-link>
+            to="/register">You don't have an account? Click here to register!
+          </nuxt-link>
         </v-form>
       </v-row>
     </v-container>
@@ -32,35 +35,44 @@
 
 <script>
 
+import {required, email} from "vuelidate/lib/validators";
 
-  export default {
+export default {
 
-    data() {
-      return {
-        loginFields: {
-          email: '',
-          password: '',
-        }
-      }
+  data() {
+    return {
+      email: '',
+      password: '',
+    }
+  },
+
+  validations: {
+    email: {
+      required,
+      email,
     },
+    password: {
+      required,
+    }
+  },
 
-    methods: {
+  methods: {
 
-      async login() {
-        try {
+    async login() {
+      try {
 
-          await this.$auth.loginWith('local', {
-            data: {
-              email: this.loginFields.email,
-              password: this.loginFields.password
-            }
-          });
+        await this.$auth.loginWith('local', {
+          data: {
+            email: this.email,
+            password: this.password
+          }
+        });
 
-        } catch (e) {
-          console.log(e);
-        }
-
+      } catch (e) {
+        console.log(e);
       }
+
     }
   }
+}
 </script>

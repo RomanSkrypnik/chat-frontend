@@ -136,19 +136,25 @@ export default {
       required,
       minLength: minLength(4),
     }
-
   },
 
   methods: {
 
-    register() {
+    async register() {
       this.$v.$touch();
 
       if (this.$v.$invalid) {
         console.log('invalid');
       }
 
-      // await this.$axios.$post('/api/auth/register', this.registerFields);
+      const registerFields = {
+        email: this.email,
+        login: this.login,
+        password: this.password
+      };
+
+      await this.$axios.$post('/api/auth/register', registerFields);
+      await this.$router.push({path: '/login'});
     }
   }
 }
