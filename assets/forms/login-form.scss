@@ -5,4 +5,16 @@
     border-radius: 5px;
   }
 
+  .login-form__stepper-header,
+  .login-form__stepper,
+  .login-form__stepper-card
+  {
+    box-shadow: none !important;
+  }
+
+  .login-form__stepper{
+    width: 50%;
+    margin: 0 auto;
+  }
+
 }

@@ -8,7 +8,7 @@
   import RegisterForm from "../components/forms/Register";
 
   export default {
-    layout: 'Unauthorized',
+    layout: 'unauthorized',
     components: {
       RegisterForm
     }
