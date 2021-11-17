@@ -11,7 +11,7 @@
           <!--        </v-list-item-avatar>-->
           <v-list-item-content>
             <v-list-item-title class="body-1" v-html="lastMessage.friend.login"></v-list-item-title>
-            <v-list-item-subtitle class="body-2" v-html="lastMessage.message.message"></v-list-item-subtitle>
+            <v-list-item-subtitle class="body-2" v-html="lastMessage.message ? lastMessage.message.message : ''"></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </nuxt-link>

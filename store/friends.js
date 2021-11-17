@@ -2,7 +2,6 @@ export const getDefaultState = () => ({
   friends: [],
   friendsBySearch: [],
   pendingRequests: [],
-  addFriend: {},
 });
 
 export const state = getDefaultState;
@@ -13,8 +12,16 @@ export const mutations = {
     state.friends = payload;
   },
 
-  SET_PENDING_REQUESTS(state, payload){
+  SET_PENDING_REQUESTS(state, payload) {
     state.pendingRequests = payload;
+  },
+
+  ADD_PENDING_REQUEST(state, payload) {
+    state.pendingRequests.push(payload);
+  },
+
+  ADD_NEW_FRIEND(state, payload) {
+    state.friends.push(payload);
   },
 
   REMOVE_PENDING_REQUEST(state, payload) {
@@ -25,7 +32,7 @@ export const mutations = {
     state.friendsBySearch = payload;
   },
 
-}
+};
 
 export const actions = {
 
@@ -55,7 +62,10 @@ export const actions = {
 
   async acceptFriendRequest({commit}, users) {
     await this.$axios.$post('/api/accept-friend-request', users)
-      .then(sender => commit('REMOVE_PENDING_REQUEST', sender))
+      .then(sender => {
+        commit('REMOVE_PENDING_REQUEST', sender);
+        commit('ADD_NEW_FRIEND', sender);
+      })
       .catch(e => console.error(e));
   },
 
@@ -65,7 +75,7 @@ export const actions = {
       .catch(e => console.error(e));
   },
 
-}
+};
 
 export const getters = {
 

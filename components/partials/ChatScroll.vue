@@ -1,6 +1,6 @@
 <template>
   <div class="chat-scroll mx-auto dark-bg col-8">
-    <ul class="chat-scroll__messages overflow-y-auto grey darken-4 pa-0 d-flex flex-column"
+    <ul class="chat-scroll__messages overflow-y-auto grey darken-4 pa-0 d-flex flex-column justify-end"
         ref="chatScroll"
         v-chat-scroll="{ always: false }"
         v-on:scroll="getMessagesByScroll"

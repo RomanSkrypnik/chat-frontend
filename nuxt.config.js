@@ -66,6 +66,12 @@ export default {
         vuex: {
           mutations: [
             {
+              'new-friend-request' : 'friends/ADD_PENDING_REQUEST'
+            },
+            {
+              'decline-friend-request' : 'friends/REMOVE_PENDING_REQUEST',
+            },
+            {
               'new-private-message' : 'privateMessages/ADD_NEW_MESSAGE'
             },
             {

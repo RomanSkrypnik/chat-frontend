@@ -1,5 +1,8 @@
 <template>
-  <v-btn color="green" @click="onAcceptFriendRequest">Add to friends</v-btn>
+  <div class="d-flex justify-space-between">
+    <v-btn color="green" @click="onAcceptFriendRequest">Add to friends</v-btn>
+    <v-btn color="red">Decline request</v-btn>
+  </div>
 </template>
 
 <script>

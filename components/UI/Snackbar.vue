@@ -34,6 +34,14 @@ export default {
       this.message = message;
       this.snackbar = true;
     });
+
+    this.$nuxt.$on('snackbar-friend-request', (sender) => {
+        this.message = {
+          sender: sender.login,
+          message: 'Added you to friends'
+        };
+        this.snackbar = true;
+    });
   }
 }
 </script>
